@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Core Online Tutorial - List Products</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+
+    <h2>Votre panier<small th:text="${Liste.nom}"></small></h2>
+    <div>
+
+        <form class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/}" method="post">
+            <div class="row">
+                <ul class="list-group col-12">
+
+                    <input type="hidden" th:field="${Liste.id}" name="id"/>
+
+                    <li  th:each="Article : ${Articles}"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <span th:if="${Article.coche} == true">
+                                <input type="checkbox" th:id="${Article.nom}" th:name="${Article.nom}" checked>
+                            </span>
+                            <span th:if="${Article.coche} == false">
+                                <input type="checkbox" th:id="${Article.nom}" th:name="${Article.nom}">
+                            </span>
+                            <label th:for="${Article.nom}" th:text="${Article.nom}"></label>
+                        </div>
+                    </li>
+
+
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="submit" class="btn btn-primary"></input>
+                            <a href="#add" class="badge text-success" title="Ajouter"></a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
