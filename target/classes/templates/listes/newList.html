@@ -20,17 +20,46 @@
 
     <h2>Nouvelle liste </h2>
     <div>
-
-        <form class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/}" method="post">
+<!--Si la liste est vite-->
+        <form  th:if="${#lists.isEmpty(Liste.id)}" class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/news}" method="post">
             <div class="form-group">
                 <label class="col-sm-2 control-label">nom:</label>
 
+                <input type="text" class="form-control" th:field="${Liste.nom}"/>
 
+                <div class="row listArti">
+                    <ul class="list-group col-12">
+            <span th:if="${not #lists.isEmpty(Articles)}">
+                    <input type="hidden" th:field="${Liste.id}" name="id"/>
 
-                    <input th:if="${#lists.isEmpty(Liste.id)}" type="text" class="form-control" th:field="${Liste.nom}"/>
+                            <li th:each="Article : ${Articles}"
+                                class="list-group-item d-flex justify-content-between align-items-center"
+                                th:text="${Article.nom}">
+                                <div>
+                                    <a href="${pageContext.request.contextPath}/supprimer?id=${listeCourse.id}&id_article=${a.id}"
+                                       class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
+                                </div>
+                            </li>
+            </span>
 
-                    <label th:if="${not #lists.isEmpty(Liste)}" th:text="${Liste.nom}"></label>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <input class="form-control" type="text" >
+                            <div>
+                                <input type="submit"class="btn btn-primary">
+                                <a  class="badge text-success" title="Ajouter"></a>
+                            </div>
+                        </li>
 
+                    </ul>
+                </div>
+            </div>
+        </form>
+<!--            else -->
+        <form  th:if="${not#lists.isEmpty(Liste.id)}" class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/newedit/{pathParam}(pathParam=${Liste.id})}" method="post">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">nom:</label>
+
+                    <label th:text="${Liste.nom}"></label>
 
             <div class="row listArti">
             <ul class="list-group col-12">
@@ -48,9 +77,9 @@
             </span>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <input class="form-control" type="text" >
+                    <input class="form-control" type="text" th:field="${lArticle.nom}" >
                     <div>
-                        <input type="submit"class="btn btn-primary"></input>
+                        <input type="submit"class="btn btn-primary">
                         <a  class="badge text-success" title="Ajouter"></a>
                     </div>
                 </li>

@@ -2,8 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.Repository.ArticlesDAO;
 import com.example.demo.Repository.ListesDAO;
+import com.example.demo.Repository.PossederRepositoryDAOImp;
 import com.example.demo.domain.Articles;
 import com.example.demo.domain.Listes;
+import com.example.demo.domain.Posseder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,8 @@ public class CourseController {
     public ListesDAO listesDAO;
     @Autowired
     public ArticlesDAO articlesDAO;
+    @Autowired
+    public PossederRepositoryDAOImp possederRepositoryDAOImp;
 
     @RequestMapping({"/list", "/"})
     public String allListName(Model model){
@@ -31,6 +35,7 @@ public class CourseController {
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("Liste", listesDAO.getListesById(id));
         model.addAttribute("Articles", articlesDAO.getAllArticlebyid(id));
+        model.addAttribute("lArticle", new Articles());
         return "listes/newList";
     }
     @RequestMapping({"/new"})
@@ -45,18 +50,29 @@ public class CourseController {
         model.addAttribute("Articles", articlesDAO.getAllArticlebyid(id));
         return "listes/panier";
     }
-    @RequestMapping(value = "/",method = RequestMethod.POST)
-   public String InsertListeAndArticles(Listes listes){
-        int id;
-        id = listesDAO.InsertListe(listes);
-        return "redirect:/Course/edit/"+id;
-    }
-
     @RequestMapping({"/delete/{id}"})
     public String deleteListes(@PathVariable Integer id, Model model){
         listesDAO.deletById(id);
         return "redirect:/Course/list";
     }
+
+    @RequestMapping(value = "/news",method = RequestMethod.POST)
+    public String InsertListe(Listes listes){
+
+            int idListe = listesDAO.InsertListe(listes);
+
+        return "redirect:/Course/edit/"+idListe;
+    }
+
+    @RequestMapping(value = "/newedit/{id}",method = RequestMethod.POST)
+    public String Insertarticleid(@PathVariable Integer id, Articles articles ){
+        if (!articles.getNom().isEmpty()) {
+            int idArticle = articlesDAO.insertArticle(articles);
+            possederRepositoryDAOImp.insertPosseder(idArticle,id);
+        }
+        return "redirect:/Course/edit/"+id;
+    }
+
 
 }
 
