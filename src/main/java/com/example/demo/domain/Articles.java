@@ -4,10 +4,16 @@ package com.example.demo.domain;
 
 public class Articles {
     private Integer id;
-    private String nom;
+    private String nomArt;
     private boolean coche;
 
+
+
     public Articles() {
+    }
+
+    public Articles(String nomArt) {
+        this.nomArt = nomArt;
     }
 
     public boolean isCoche() {
@@ -25,12 +31,12 @@ public class Articles {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getNom() {
-        return nom;
+    public String getNomArt() {
+        return nomArt;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setNomArt(String nomArt) {
+        this.nomArt = nomArt;
     }
+
 }

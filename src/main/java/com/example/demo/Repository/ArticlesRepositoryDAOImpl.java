@@ -3,15 +3,12 @@ package com.example.demo.Repository;
 import com.example.demo.domain.Articles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 @Repository
 public class ArticlesRepositoryDAOImpl implements ArticlesDAO {
@@ -28,7 +25,7 @@ public class ArticlesRepositoryDAOImpl implements ArticlesDAO {
         RowMapper<Articles> vRowMapper = (pRS, pRowNum) -> {
             Articles vArticles = new Articles();
             vArticles.setId(pRS.getInt("id"));
-            vArticles.setNom(pRS.getString("nom"));
+            vArticles.setNomArt(pRS.getString("nom"));
             vArticles.setCoche(pRS.getBoolean("coche"));
             return vArticles;
         };
@@ -47,7 +44,7 @@ public class ArticlesRepositoryDAOImpl implements ArticlesDAO {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[] { "id" });
-            ps.setString(1, articles.getNom());
+            ps.setString(1, articles.getNomArt());
             return ps;
         }, keyHolder);
         return keyHolder.getKey().intValue();

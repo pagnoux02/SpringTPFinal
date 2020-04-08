@@ -12,6 +12,10 @@ public class Listes {
         this.nom = nom;
     }
 
+    public Listes(String nom) {
+        this.nom = nom;
+    }
+
     public Integer getId() {
         return id;
     }

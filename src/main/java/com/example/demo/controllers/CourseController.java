@@ -5,7 +5,6 @@ import com.example.demo.Repository.ListesDAO;
 import com.example.demo.Repository.PossederRepositoryDAOImp;
 import com.example.demo.domain.Articles;
 import com.example.demo.domain.Listes;
-import com.example.demo.domain.Posseder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +40,7 @@ public class CourseController {
     @RequestMapping({"/new"})
     public String newList( Model model){
         model.addAttribute("Liste", new Listes());
-        model.addAttribute("Articles", new Articles());
+        model.addAttribute("lArticle", new Articles());
         return "listes/newList";
     }
     @RequestMapping({"/panier/{id}"})
@@ -57,16 +56,24 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/news",method = RequestMethod.POST)
-    public String InsertListe(Listes listes){
+    public String InsertListe(Listes listes,Articles articles ){
 
+        System.out.println(listes.getNom() +" =/= "+articles.getNomArt());
+        if(!listes.getNom().isEmpty()) {
             int idListe = listesDAO.InsertListe(listes);
 
-        return "redirect:/Course/edit/"+idListe;
+            if (!articles.getNomArt().isEmpty()) {
+                int idArticle = articlesDAO.insertArticle(articles);
+                possederRepositoryDAOImp.insertPosseder(idArticle, idListe);
+            }
+            return "redirect:/Course/edit/"+idListe;
+        }
+        return "redirect:/Course/new";
     }
 
     @RequestMapping(value = "/newedit/{id}",method = RequestMethod.POST)
     public String Insertarticleid(@PathVariable Integer id, Articles articles ){
-        if (!articles.getNom().isEmpty()) {
+        if (!articles.getNomArt().isEmpty()) {
             int idArticle = articlesDAO.insertArticle(articles);
             possederRepositoryDAOImp.insertPosseder(idArticle,id);
         }
