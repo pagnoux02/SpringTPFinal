@@ -1,6 +1,5 @@
 package com.example.demo.Repository;
 
-import com.example.demo.domain.Articles;
 import com.example.demo.domain.Listes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
