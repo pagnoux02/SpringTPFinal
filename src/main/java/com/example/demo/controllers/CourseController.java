@@ -80,6 +80,11 @@ public class CourseController {
         return "redirect:/Course/edit/"+id;
     }
 
+    @RequestMapping({"/deleteArt/{idart}/{idlist}"})
+    public String deleteArticles(@PathVariable Integer idlist,@PathVariable Integer idart, Model model){
+        articlesDAO.deleteById(idart);
+        return "redirect:/Course/edit/"+idlist;
+    }
 
 }
 

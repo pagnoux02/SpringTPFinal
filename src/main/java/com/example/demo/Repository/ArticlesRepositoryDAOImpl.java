@@ -24,7 +24,7 @@ public class ArticlesRepositoryDAOImpl implements ArticlesDAO {
 
         RowMapper<Articles> vRowMapper = (pRS, pRowNum) -> {
             Articles vArticles = new Articles();
-            vArticles.setId(pRS.getInt("id"));
+            vArticles.setIdArt(pRS.getInt("id"));
             vArticles.setNomArt(pRS.getString("nom"));
             vArticles.setCoche(pRS.getBoolean("coche"));
             return vArticles;
@@ -35,7 +35,8 @@ public class ArticlesRepositoryDAOImpl implements ArticlesDAO {
 
     @Override
     public void deleteById(int id) {
-
+        String deleteQuery = "delete from Articles where id = ?";
+        jdbcTemplate.update(deleteQuery, id);
     }
 
     @Override

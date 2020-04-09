@@ -57,11 +57,10 @@
 
                             <li th:each="Article : ${Articles}"
                                 class="list-group-item d-flex justify-content-between align-items-center"
-                                th:text="${Article.nomArt}">
-                                <div>
-                                    <a href="${pageContext.request.contextPath}/supprimer?id=${listeCourse.id}&id_article=${a.id}"
-                                       class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
-                                </div>
+                               ><label  th:text="${Article.nomArt}"></label>
+
+                                    <a th:href="${'/Course/deleteArt/' + Article.idArt+'/'+Liste.id}" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
+
                             </li>
             </span>
 
