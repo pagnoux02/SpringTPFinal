@@ -9,8 +9,7 @@ public class Posseder {
         this.id_listes = id_listes;
     }
 
-    public Integer getId_Articles() {
-        return id_Articles;
+    public Integer getId_Articles() { return id_Articles;
     }
 
     public void setId_Articles(Integer id_Articles) {

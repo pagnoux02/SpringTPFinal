@@ -4,21 +4,21 @@
     <title>Spring Core Online Tutorial - List Products</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
 <!--    <link href="../../static/css/spring-core.css"-->
 <!--          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>-->
-    <link href="../../static/css/spring-core.css" rel="stylesheet">
+    <link href="../../staticcss/spring-core.css" rel="stylesheet" media="screen"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+<div  th:insert="~{fragments/headerfrag :: header}"> </div>
 <div class="container">
 
-    <h2>Nouvelle liste </h2>
+    <h2 class="text-center">Nouvelle liste </h2>
     <div>
 <!--Si la liste est vite-->
         <form  th:if="${#lists.isEmpty(Liste.id)}" class="row justify-content-center mb-2"  th:action="@{/Course/news}" method="post">
@@ -57,11 +57,10 @@
 
                             <li th:each="Article : ${Articles}"
                                 class="list-group-item d-flex justify-content-between align-items-center"
-                                th:text="${Article.nomArt}">
-                                <div>
-                                    <a href="${pageContext.request.contextPath}/supprimer?id=${listeCourse.id}&id_article=${a.id}"
-                                       class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
-                                </div>
+                               ><label  th:text="${Article.nomArt}"></label>
+
+                                    <a th:href="${'/Course/deleteArt/' + Article.idArt+'/'+Liste.id}" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
+
                             </li>
             </span>
 

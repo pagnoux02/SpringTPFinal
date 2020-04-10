@@ -4,9 +4,7 @@
     <title>Spring Core Online Tutorial - List Products</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
@@ -15,9 +13,10 @@
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
+<div  th:insert="~{fragments/headerfrag :: header}"> </div>
 <div class="container">
 
-    <h2>Votre panier<small th:text="${Liste.nom}"></small></h2>
+    <h2 class="text-center">Votre panier<small th:text="${Liste.nom}"></small></h2>
     <div>
 
         <form class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/}" method="post">
@@ -31,11 +30,11 @@
                         <div>
                             <span th:if="${Article.coche} == true">
 
-                                <input type="checkbox" th:id="${Article.nomArt}" th:name="${Article.nomArt}" checked>
+                                <input type="checkbox" th:id="${Article.nomArt}" th:name="${Article.nomArt}" th:value="${Article.idArt}" checked>
 
                             </span>
                             <span th:if="${Article.coche} == false">
-                                <input type="checkbox" th:id="${Article.nomArt}" th:name="${Article.nomArt}">
+                                <input type="checkbox" th:id="${Article.nomArt}" th:name="${Article.nomArt}" th:value="${Article.idArt}">
                             </span>
                             <label th:for="${Article.nomArt}" th:text="${Article.nomArt}"></label>
                         </div>
@@ -44,7 +43,7 @@
 
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <input type="submit" class="btn btn-primary"></input>
+                            <input type="submit" class="btn btn-primary">
                             <a href="#add" class="badge text-success" title="Ajouter"></a>
                         </div>
                     </li>

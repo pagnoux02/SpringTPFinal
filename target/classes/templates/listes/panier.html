@@ -4,9 +4,7 @@
     <title>Spring Core Online Tutorial - List Products</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
@@ -15,9 +13,10 @@
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
+<div  th:insert="~{fragments/headerfrag :: header}"> </div>
 <div class="container">
 
-    <h2>Votre panier<small th:text="${Liste.nom}"></small></h2>
+    <h2 class="text-center">Votre panier<small th:text="${Liste.nom}"></small></h2>
     <div>
 
         <form class="row justify-content-center mb-2" th:object="${Liste}" th:action="@{/Course/}" method="post">

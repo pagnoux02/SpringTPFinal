@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Spring Core Online Tutorial - List Products</title>
+
+    <title>Listes Prédéfinies</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+<!--          th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"-->
+
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
-    <link href="../../static/css/spring-core.css"
-          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../../staticcss/spring-core.css" rel="stylesheet" media="screen"/>
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+<div  th:insert="~{fragments/headerfrag :: header}"> </div>
 <body>
+
 <div class="container">
-    <h1>ok</h1>
+    <h2 class="text-center">Listes Prédéfinies</h2>
     <div th:if="${not #lists.isEmpty(Listes)}">
-        <h2> List</h2>
+
         <table class="table table-striped">
 
             <tr th:each="Liste : ${Listes}">
